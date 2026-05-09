@@ -1,10 +1,12 @@
 # =====================================
 # Simple Phishing Link Detector
-# Android Supported
+# Android  Supported
 # =====================================
 
 import re
 from urllib.parse import urlparse
+import time 
+import sys
 
 # Suspicious keywords
 phishing_keywords = [
@@ -17,7 +19,12 @@ phishing_keywords = [
     "free",
     "bonus",
     "gift",
-    "password"
+    "password",
+    "free-internet",
+    "reward",
+    "security",
+    "win",
+    "won"
 ]
 
 # URL shorteners
@@ -25,7 +32,8 @@ shorteners = [
     "bit.ly",
     "tinyurl.com",
     "goo.gl",
-    "t.co"
+    "t.co",
+    ".xyz"
 ]
 
 
@@ -101,7 +109,25 @@ def detect_phishing(url):
 # =============================
 # User Input
 # =============================
+print("|========°Phishing Link Detector°========|")
+def type_out_text(text, delay = 0.05):
+    for char in text:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(delay)
 
-url = input("Enter URL to scan: ")
+text_to_type = "Phishing Link Detector Started............ Enter URL and press Enter to check it for suspiciousness or Press ENTER without input to exit...\n"
 
-detect_phishing(url)
+type_out_text(text_to_type, delay = 0.05)
+    
+
+
+while True:
+    url = input("Enter URL to scan: ")
+    
+    #Exit condition
+    if url == "":
+        print("Exiting phishing link detector...")
+        break 
+
+    detect_phishing(url)
